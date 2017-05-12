@@ -55,7 +55,11 @@ if ($_POST['action'] == 'Update') {
     if(empty($_POST['hidden_villeclient']))
       $villec= "";
     else
+    {
       $villec = $_POST['hidden_villeclient'];
+      $villec = addslashes($villec);
+      $villec = utf8_decode($villec);
+    }
 
     if(empty($_POST['hidden_numtelclient']))
       $numtelc = "";

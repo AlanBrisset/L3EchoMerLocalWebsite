@@ -1,4 +1,6 @@
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
 
 <?php
 
@@ -128,7 +130,7 @@ if(isset($_POST)) {
     }
   }
 
-  #Mise à jour du nom du client
+  #Mise à jour du numéro de téléphone du client
   if(!empty($_POST['new_numtelclient']))
   {
     $aucuneInsertion = False;

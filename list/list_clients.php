@@ -80,7 +80,7 @@ if ($result->num_rows > 0) {
         echo '<td><input type="hidden" name="hidden_prenomclient" value= "' . utf8_encode($row["prenom"]) . ' "> '  . utf8_encode($row["prenom"]) . '</td>';
         echo '<td><input type="hidden" name="hidden_adresseclient" value= "' . utf8_encode($row["adresse"]) . ' "> '  . utf8_encode($row["adresse"]) . '</td>';
         echo '<td><input type="hidden" name="hidden_codepostalclient" value=' .  $row["codepostal"] . ' "> '  .  $row["codepostal"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_villeclient" value= "' . $row["ville"] . ' "> '  . utf8_encode($row["ville"]) . '</td>';
+        echo '<td><input type="hidden" name="hidden_villeclient" value= "' . utf8_encode($row["ville"]) . ' "> '  . utf8_encode($row["ville"]) . '</td>';
         echo '<td><input type="hidden" name="hidden_numtelclient" value= "' .  $row["num_tel"] . ' "> '  .  $row["num_tel"] . '</td>';
         echo '<td><input type="hidden" name="hidden_datenaissanceclient" value= "' .  $row["date_naissance"] . ' "> '  .  $row["date_naissance"] . '</td>';
         echo '<td><input type="hidden" name="hidden_nbachatsclient" value= ' . $row["nb_achats"] . '</td>';
