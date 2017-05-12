@@ -24,6 +24,7 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error . "\n");
 }
 
+echo '<body>';
 
 // ----------- EXTRACTION DES VALEURS DU FORMULAIRE -----------
 
@@ -120,7 +121,9 @@ if ($_POST['action'] == 'Update') {
     #Troisième ligne du tableau (valeurs à rentrer par l'utilisateur)
     echo '<tr>';
 
-    echo '<td>' . $idc . '</td>';
+    echo '<form action="update_confirmed_client.php" method="post">';
+
+    echo '<td><input type="hidden" name="new_idclient" value=' . $idc . ' >' . $idc . '</td>';
     echo '<td><input type="text" name="new_nomclient" maxlength="60"></td>';
     echo '<td><input type="text" name="new_prenomclient" maxlength="60"></td>';
     echo '<td><input type="text" name="new_adresseclient" maxlength="200"></td>';
@@ -131,86 +134,55 @@ if ($_POST['action'] == 'Update') {
     echo '<td>' .  $nbachatsc . '</td>';
     echo '<td><input type="text" name="new_commentairesclient" maxlength="250"></td>';
 
+
+
     echo '</tr>';
+    echo '</table>';
 
+    echo'<br/>';
 
+    echo '<input type="submit" name="action" value="Modifier"/>';
+    echo '</form><br/><br/>';
 
+    echo'<a href="/echomer">Retour à l\'accueil</a>';
 
 
 
 } else if ($_POST['action'] == 'Delete') {
 
-    //action for delete
+  $idc = $_POST['hidden_idclient'];
+
+  $sqlc = "DELETE FROM CLIENT WHERE id_client = " . $idc . ";";
+  $mysqli->query($sqlc);
+
+  if ($mysqli->error) {
+      echo '<p>Erreur durant la suppression du client. Voici l\'erreur, à montrer à un développeur comprenant le SQL :</p><br/>';
+      try {
+        throw new Exception("MySQL error $mysqli->error <br> Query:<br> $sqlc", $mysqli->errno);
+      } catch(Exception $e ) {
+          echo "Error No: ".$e->getCode(). " - ". $e->getMessage() . "<br >";
+          echo nl2br($e->getTraceAsString());
+        }
+  }
+
+  else {
+    echo '<h2>Suppression du client réussie !<h2><br/>';
+  }
+
+  include('list_clients.php');
+
+
 
 } else {
 
-    //invalid action!
+    echo '<p>Quelque chose s\'est mal déroulé..</p>';
+    include('list_clients.php');
 
 }
-/*
-if(isset($_POST) && !empty($_POST['nomclient']) && !empty($_POST['prenomclient'])) {
-  extract($_POST);
-
-  #Extraction des valeurs obligatoires (valeurs NON NULL)
-  $nomc = $_POST['nomclient'];
-  $prenomc = $_POST['prenomclient'];
-
-  #Extraction des valeurs NULL. Si on détecte qu'elles sont vides, on leur donne une valeur vide.
-  if(empty($_POST['adresseclient']))
-    $adressec = "";
-  else
-    $adressec = $_POST['adresseclient'];
-
-  if(empty($_POST['codepostalclient']))
-    $codepostalc = 0;
-  else
-    $codepostalc = $_POST['codepostalclient'];
-
-  if(empty($_POST['villeclient']))
-    $villec= "";
-  else
-    $villec = $_POST['villeclient'];
-
-  if(empty($_POST['numtelclient']))
-    $numtelc = "";
-  else
-    $numtelc = $_POST['numtelclient'];
-
-  if(empty($_POST['datenaissanceclient']))
-    $datenaissancec = "";
-  else
-    $datenaissancec = $_POST['datenaissanceclient'];
-
-  if(empty($_POST['commentairesclient']))
-    $commentairesc = "";
-  else
-  {
-    $commentairesc = $_POST['commentairesclient'];
-    $commentairesc = addslashes($commentairesc);
-    $commentairesc = utf8_decode($commentairesc);
-  }
-
-// ----------- INSERTION DES VALEURS DANS LA BASE DE DONNEES -----------
-
-$sqlc = "INSERT INTO CLIENT (nom, prenom, adresse, codepostal, ville, num_tel, date_naissance, commentaires) VALUES(\"$nomc\", \"$prenomc\", \"$adressec\" , \"$codepostalc\" , \"$villec\" , \"$numtelc\", \"$datenaissancec\", \"$commentairesc\")";
-
-$mysqli->query($sqlc);
-
-if ($mysqli->error) {
-    echo '<p>Erreur durant l\'insertion. Le client que vous cherchez à insérer existe peut-être déjà dans la base de données.</p>';
-}
-else {
-  echo '<p>Insertion effectuée. ' . $nomc . ' ' . $prenomc . ' a été ajouté dans la base de données. </p>';
-}
 
 
-$mysqli->close();
-
-}
-else {
-  echo '<p>Vous avez oublié de remplir un champ.</p>';
-}
-
-include('add_client.php'); // On inclut le formulaire d'identification
-exit;*/
+echo '</body>';
 ?>
+
+<br/>
+<br/>
