@@ -60,11 +60,12 @@ if ($result->num_rows > 0) {
         echo '<form action="update_delete_produit.php" method="post">';
 
         echo '<td><input type="hidden" name="hidden_idproduit" value=' . $row["id_produit"] . ' >' . $row["id_produit"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_nomproduit" value=' . $row["nom"] . ' >' . $row["nom"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_descriptifproduit" value=' . $row["descriptif"] . ' >' . $row["descriptif"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_nomproduit" value="' . utf8_encode($row["nom"]) . '" >' . $row["nom"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_descriptifproduit" value="' . $row["descriptif"] . '" >' . $row["descriptif"] . '</td>';
         echo '<td><input type="hidden" name="hidden_prixproduit" value=' . $row["prix"] . ' >' . $row["prix"] . '</td>';
         echo '<td><input type="hidden" name="hidden_coutproduit" value=' . $row["cout"] . ' >' . $row["cout"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_materiauxproduit" value=' . $row["materiaux"] . ' >' . $row["materiaux"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_materiauxproduit" value="' . utf8_encode($row["materiaux"]) . '">' . $row["materiaux"] . '</td>';
+
         echo '<td><input type="submit" name="action" value="Update" /></td>';
         echo '<td><input type="submit" name="action" value="Delete" onclick="return confirm(\'Voulez-vous vraiment supprimer ce produit? Cela supprimera également toutes les ventes dans lesquelles il apparaît.\')" /></td>';
 

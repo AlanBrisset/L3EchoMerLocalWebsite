@@ -38,7 +38,6 @@ if(isset($_POST) && !empty($_POST['nomproduit']) && !empty($_POST['prixproduit']
   {
     $descriptifp = $_POST['descriptifproduit'];
     $descriptifp = addslashes($descriptifp);
-    $descriptifp = utf8_decode($descriptifp);
   }
 
   if(empty($_POST['coutproduit']))

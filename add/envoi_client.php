@@ -51,8 +51,6 @@ if(isset($_POST) && !empty($_POST['nomclient']) && !empty($_POST['prenomclient']
   else
   {
     $codepostalc = $_POST['codepostalclient'];
-    $adressec = addslashes($adressec);
-    $adressec = utf8_decode($adressec);
   }
 
   if(empty($_POST['villeclient']))

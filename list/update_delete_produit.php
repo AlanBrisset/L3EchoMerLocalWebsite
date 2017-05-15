@@ -45,7 +45,11 @@ if ($_POST['action'] == 'Update') {
     if(empty($_POST['hidden_descriptifproduit']))
       $descriptifp = "";
     else
+    {
       $descriptifp = $_POST['hidden_descriptifproduit'];
+      $descriptifp = addslashes($descriptifp);
+      $descriptifp = utf8_decode($descriptifp);
+    }
 
     if(empty($_POST['hidden_coutproduit']))
       $coutp = 0;

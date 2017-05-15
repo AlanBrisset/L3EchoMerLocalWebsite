@@ -53,12 +53,31 @@ if(isset($_POST)) {
     }
   }
 
+  #Mise à jour du descriptif du produit
+  if(!empty($_POST['new_descriptifproduit']))
+  {
+    $aucuneInsertion = False;
+    $sqlp = "UPDATE produit SET descriptif=\"" . $_POST['new_descriptifproduit'] . "\" WHERE id_produit = " . $_POST['new_idproduit'] . ";";
+    $mysqli->query($sqlp);
+
+    if ($mysqli->error) {
+        $erreurUpdate = False;
+        echo '<p>Erreur durant la mise à jour du descriptif du produit. Voici l\'erreur, à montrer à un développeur comprenant le SQL :</p><br/>';
+        try {
+          throw new Exception("MySQL error $mysqli->error <br> Query:<br> $sqlp", $mysqli->errno);
+        } catch(Exception $e ) {
+            echo "Error No: ".$e->getCode(). " - ". $e->getMessage() . "<br >";
+            echo nl2br($e->getTraceAsString());
+          }
+    }
+  }
+
 
   #Mise à jour du prix du produit
   if(!empty($_POST['new_prixproduit']))
   {
     $aucuneInsertion = False;
-    $sqlp = "UPDATE produit SET prix=\"" . $_POST['new_prixproduit'] . "\" WHERE id_produit = " . $_POST['new_idproduit'] . ";";
+    $sqlp = "UPDATE produit SET prix=" . $_POST['new_prixproduit'] . " WHERE id_produit = " . $_POST['new_idproduit'] . ";";
     $mysqli->query($sqlp);
 
     if ($mysqli->error) {
@@ -77,7 +96,7 @@ if(isset($_POST)) {
   if(!empty($_POST['new_coutproduit']))
   {
     $aucuneInsertion = False;
-    $sqlp = "UPDATE produit SET cout=\"" . $_POST['new_coutproduit'] . "\" WHERE id_produit = " . $_POST['new_idproduit'] . ";";
+    $sqlp = "UPDATE produit SET cout=" . $_POST['new_coutproduit'] . " WHERE id_produit = " . $_POST['new_idproduit'] . ";";
     $mysqli->query($sqlp);
 
     if ($mysqli->error) {
