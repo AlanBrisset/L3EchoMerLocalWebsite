@@ -47,6 +47,8 @@ if ($result->num_rows > 0) {
     echo'<th><a href="#" onclick="sortTable(this,3); return false;">Prix</a></th>';
     echo'<th><a href="#" onclick="sortTable(this,4); return false;">Coût</a></th>';
     echo'<th>Matériaux</th>';
+    echo'<th>Modifier</th>';
+    echo'<th>Supprimer</th>';
     echo '</tr>';
     echo'</thead>';
 
@@ -55,19 +57,23 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         echo '<tr>';
 
-        echo '<td>' . $row["id_produit"] . '</td>';
-        echo '<td>' . $row["nom"] . '</td>';
-        echo '<td>' . $row["descriptif"] . '</td>';
-        echo '<td>' . $row["prix"] . '</td>';
-        echo '<td>' . $row["cout"] . '</td>';
-        echo '<td>' . $row["materiaux"] . '</td>';
+        echo '<form action="update_delete_produit.php" method="post">';
+
+        echo '<td><input type="hidden" name="hidden_idproduit" value=' . $row["id_produit"] . ' >' . $row["id_produit"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_nomproduit" value=' . $row["nom"] . ' >' . $row["nom"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_descriptifproduit" value=' . $row["descriptif"] . ' >' . $row["descriptif"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_prixproduit" value=' . $row["prix"] . ' >' . $row["prix"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_coutproduit" value=' . $row["cout"] . ' >' . $row["cout"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_materiauxproduit" value=' . $row["materiaux"] . ' >' . $row["materiaux"] . '</td>';
+        echo '<td><input type="submit" name="action" value="Update" /></td>';
+        echo '<td><input type="submit" name="action" value="Delete" onclick="return confirm(\'Voulez-vous vraiment supprimer ce produit? Cela supprimera également toutes les ventes dans lesquelles il apparaît.\')" /></td>';
 
         echo '</tr>';
     }
 
     echo '</table>';
 } else {
-    echo "0 results";
+    echo "Pas de produit trouvé dans la base de données.";
 }
 $mysqli->close();
 
