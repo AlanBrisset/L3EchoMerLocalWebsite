@@ -76,17 +76,17 @@ if ($result->num_rows > 0) {
         echo '<form action="update_delete_client.php" method="post">';
 
         echo '<td><input type="hidden" name="hidden_idclient" value=' . $row["id_client"] . ' > '  . $row["id_client"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_nomclient" value=' . utf8_encode($row["nom"]) . ' > '  . utf8_encode($row["nom"]) . '</td>';
-        echo '<td><input type="hidden" name="hidden_prenomclient" value=' . utf8_encode($row["prenom"]) . ' > '  . utf8_encode($row["prenom"]) . '</td>';
-        echo '<td><input type="hidden" name="hidden_adresseclient" value=' . utf8_encode($row["adresse"]) . ' > '  . utf8_encode($row["adresse"]) . '</td>';
-        echo '<td><input type="hidden" name="hidden_codepostalclient" value=' .  $row["codepostal"] . ' > '  .  $row["codepostal"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_villeclient" value=' . utf8_encode($row["ville"]) . ' > '  . utf8_encode($row["ville"]) . '</td>';
-        echo '<td><input type="hidden" name="hidden_numtelclient" value=' .  $row["num_tel"] . ' > '  .  $row["num_tel"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_datenaissanceclient" value=' .  $row["date_naissance"] . ' > '  .  $row["date_naissance"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_nbachatsclient" value=' .  $row["nb_achats"] . ' > '  .  $row["nb_achats"] . '</td>';
-        echo '<td><input type="hidden" name="hidden_commentairesclient" value=' .  utf8_encode($row["commentaires"]) . ' > '  .  utf8_encode($row["commentaires"]) . '</td>';
+        echo '<td><input type="hidden" name="hidden_nomclient" value= "' . utf8_encode($row["nom"]) . ' "> '  . utf8_encode($row["nom"]) . '</td>';
+        echo '<td><input type="hidden" name="hidden_prenomclient" value= "' . utf8_encode($row["prenom"]) . ' "> '  . utf8_encode($row["prenom"]) . '</td>';
+        echo '<td><input type="hidden" name="hidden_adresseclient" value= "' . utf8_encode($row["adresse"]) . ' "> '  . utf8_encode($row["adresse"]) . '</td>';
+        echo '<td><input type="hidden" name="hidden_codepostalclient" value=' .  $row["codepostal"] . ' "> '  .  $row["codepostal"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_villeclient" value= "' . utf8_encode($row["ville"]) . ' "> '  . utf8_encode($row["ville"]) . '</td>';
+        echo '<td><input type="hidden" name="hidden_numtelclient" value= "' .  $row["num_tel"] . ' "> '  .  $row["num_tel"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_datenaissanceclient" value= "' .  $row["date_naissance"] . ' "> '  .  $row["date_naissance"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_nbachatsclient" value= ' . $row["nb_achats"] . '</td>';
+        echo '<td><input type="hidden" name="hidden_commentairesclient" value= "' .  utf8_encode($row["commentaires"]) . ' "> '  .  utf8_encode($row["commentaires"]) . '</td>';
         echo '<td><input type="submit" name="action" value="Update" /></td>';
-        echo '<td><input type="submit" name="action" value="Delete" /></td>';
+        echo '<td><input type="submit" name="action" value="Delete" onclick="return confirm(\'Voulez-vous vraiment supprimer ce client? Cela supprimera également toutes les ventes dans lesquelles il apparaît.\')" /></td>';
 
         echo '</form>';
 

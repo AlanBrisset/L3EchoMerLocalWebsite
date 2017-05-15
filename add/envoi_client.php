@@ -29,24 +29,40 @@ if(isset($_POST) && !empty($_POST['nomclient']) && !empty($_POST['prenomclient']
   extract($_POST);
 
   #Extraction des valeurs obligatoires (valeurs NON NULL)
-  $nomc = $_POST['nomclient'];
-  $prenomc = $_POST['prenomclient'];
+  $nomc2 = $_POST['nomclient'];
+  $nomc = addslashes($nomc2);
+  $nomc = utf8_decode($nomc);
+
+  $prenomc2 = $_POST['prenomclient'];
+  $prenomc = addslashes($prenomc2);
+  $prenomc = utf8_decode($prenomc);
 
   #Extraction des valeurs NULL. Si on détecte qu'elles sont vides, on leur donne une valeur vide.
   if(empty($_POST['adresseclient']))
     $adressec = "";
   else
+  {
     $adressec = $_POST['adresseclient'];
+    $adressec = utf8_decode($adressec);
+  }
 
   if(empty($_POST['codepostalclient']))
     $codepostalc = 0;
   else
+  {
     $codepostalc = $_POST['codepostalclient'];
+    $adressec = addslashes($adressec);
+    $adressec = utf8_decode($adressec);
+  }
 
   if(empty($_POST['villeclient']))
     $villec= "";
   else
+  {
     $villec = $_POST['villeclient'];
+    $villec = addslashes($villec);
+    $villec = utf8_decode($villec);
+  }
 
   if(empty($_POST['numtelclient']))
     $numtelc = "";
@@ -77,7 +93,7 @@ if ($mysqli->error) {
     echo '<p>Erreur durant l\'insertion. Le client que vous cherchez à insérer existe peut-être déjà dans la base de données.</p>';
 }
 else {
-  echo '<p>Insertion effectuée. ' . $nomc . ' ' . $prenomc . ' a été ajouté dans la base de données. </p>';
+  echo '<p>Insertion effectuée. ' . $nomc2 . ' ' . $prenomc2 . ' a été ajouté dans la base de données. </p>';
 }
 
 
