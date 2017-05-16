@@ -50,6 +50,8 @@ if ($result->num_rows > 0) {
     echo'<th>Date de la vente</th>';
     echo'<th><a href="#" onclick="sortTable(this,9); return false;">Plateforme de la vente</th>';
     echo'<th>Commentaires</th>';
+    echo'<th>Modifier</th>';
+    echo'<th>Supprimer</th>';
 
     #On traite ensuite ligne par ligne (vente par vente)
     #$row contiendra toutes les ventes une par une
@@ -71,7 +73,7 @@ if ($result->num_rows > 0) {
         if ($result2->num_rows > 0) {
 
           $row2 = $result2->fetch_assoc();
-          echo '<td><input type="hidden" name="hidden_nomclientvente" value=' . $row["nom"] . ' >' . $row2["nom"] . '</td>';
+          echo '<td><input type="hidden" name="hidden_nomclientvente" value=' . $row2["nom"] . ' >' . $row2["nom"] . '</td>';
         }
         else {
           echo '<td><input type="hidden" name="hidden_nomclientvente" value="null" >(erreur)</td>';
@@ -89,7 +91,7 @@ if ($result->num_rows > 0) {
         if ($result3->num_rows > 0) {
 
           $row3 = $result3->fetch_assoc();
-          echo '<td>' . $row3["nom"] . '</td>';
+          echo '<td><input type="hidden" name="hidden_nomproduitvente" value=' . $row3["nom"] . ' >' . $row3["nom"] . '</td>';
         }
         else {
           echo '<td>(erreur)</td>';

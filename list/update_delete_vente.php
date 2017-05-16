@@ -1,5 +1,6 @@
 <head>
   <link rel="stylesheet" href="/echomer/style.css" type="text/css">
+  <script type="text/javascript" src="/echomer/js/trieurTableau.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 
@@ -34,91 +35,61 @@ if ($_POST['action'] == 'Update') {
 
     extract($_POST);
     #Extraction des valeurs obligatoires (valeurs NON NULL)
-    $idc = $_POST['hidden_idvente'];
-    $nomc = $_POST['hidden_nomvente'];
-    $prenomc = $_POST['hidden_prenomvente'];
+    $idv = $_POST['hidden_idvente'];
+    $nomclientv = $_POST['hidden_nomclientvente'];
+    $idproduitv = $_POST['hidden_idproduitvente'];
+    $nomproduitv = $_POST['hidden_nomproduitvente'];
+    $quantitev = $_POST['hidden_quantitevente'];
+    $prixv = $_POST['hidden_prixvente'];
+    $moyenachatv = $_POST['hidden_moyenachatvente'];
 
     #Extraction des valeurs NULL. Si on détecte qu'elles sont vides, on leur donne une valeur vide.
 
-    echo '<h1>Modification du vente</h1>';
+    echo '<h1>Modification de la vente</h1>';
 
-    if(empty($_POST['hidden_adressevente']))
-      $adressec = "";
+    if(empty($_POST['hidden_idclientvente']))
+      $idclientv = "";
     else
-      $adressec = $_POST['hidden_adressevente'];
+      $idclientv = $_POST['hidden_idclientvente'];
 
-    if(empty($_POST['hidden_codepostalvente']))
-      $codepostalc = 0;
+    if(empty($_POST['hidden_dateachatvente']))
+      $dateachatv = "";
     else
-      $codepostalc = $_POST['hidden_codepostalvente'];
-
-    if(empty($_POST['hidden_villevente']))
-      $villec= "";
-    else
-    {
-      $villec = $_POST['hidden_villevente'];
-      $villec = addslashes($villec);
-      $villec = utf8_decode($villec);
-    }
-
-    if(empty($_POST['hidden_numtelvente']))
-      $numtelc = "";
-    else
-      $numtelc = $_POST['hidden_numtelvente'];
-
-    if(empty($_POST['hidden_datenaissancevente']))
-      $datenaissancec = "";
-    else
-      $datenaissancec = $_POST['hidden_datenaissancevente'];
-
-      if(empty($_POST['hidden_nbachatsvente']))
-        $nbachatsc = 0;
-      else
-        $nbachatsc = $_POST['hidden_nbachatsvente'];
+      $dateachatv = $_POST['hidden_dateachatvente'];
 
     if(empty($_POST['hidden_commentairesvente']))
-      $commentairesc = "";
+      $commentairesv = "";
     else
-    {
-      $commentairesc = $_POST['hidden_commentairesvente'];
-      $commentairesc = addslashes($commentairesc);
-      $commentairesc = utf8_decode($commentairesc);
-    }
-
-
-
+      $commentairesv = $_POST['hidden_commentairesvente'];
 
 
     #Première ligne du tableau (légende)
     echo '<table>';
-    echo'<thead>';
     echo'<tr>';
-    echo'<th>ID</th>';
-    echo'<th>Nom</th>';
-    echo'<th>Prénom</th>';
-    echo'<th>Adresse</th>';
-    echo'<th>Code Postal</th>';
-    echo'<th>Ville</th>';
-    echo'<th>Num tél</th>';
-    echo'<th>Date de naissance</th>';
-    echo'<th>Nb achats</th>';
+    echo'<th><a href="#" onclick="sortTable(this,1); return false;">ID vente</th>';
+    echo'<th><a href="#" onclick="sortTable(this,2); return false;">ID client</th>';
+    echo'<th><a href="#" onclick="sortTable(this,3); return false;">Nom du client</th>';
+    echo'<th><a href="#" onclick="sortTable(this,4); return false;">ID produit</th>';
+    echo'<th><a href="#" onclick="sortTable(this,5); return false;">Nom du produit</th>';
+    echo'<th><a href="#" onclick="sortTable(this,6); return false;">Nb d\'articles achetés</th>';
+    echo'<th><a href="#" onclick="sortTable(this,7); return false;">Prix total</th>';
+    echo'<th>Date de la vente</th>';
+    echo'<th><a href="#" onclick="sortTable(this,9); return false;">Plateforme de la vente</th>';
     echo'<th>Commentaires</th>';
-    echo'</tr>';
-    echo'</thead>';
 
     #Seconde ligne du tableau (valeurs initiales)
     echo '<tr>';
 
-    echo '<td>' . $idc . '</td>';
-    echo '<td>' . utf8_encode($nomc) . '</td>';
-    echo '<td>' . utf8_encode($prenomc) . '</td>';
-    echo '<td>' . utf8_encode($adressec) . '</td>';
-    echo '<td>' .  $codepostalc . '</td>';
-    echo '<td>' . $villec . '</td>';
-    echo '<td>' .  $numtelc . '</td>';
-    echo '<td>' .  $datenaissancec . '</td>';
-    echo '<td>' .  $nbachatsc . '</td>';
-    echo '<td>' .  utf8_encode($commentairesc) . '</td>';
+    echo '<td>' . $idv . '</td>';
+    echo '<td>' . $idclientv . '</td>';
+    echo '<td>' . utf8_encode($nomclientv) . '</td>';
+    echo '<td>' . $idproduitv . '</td>';
+    echo '<td>' . utf8_encode($nomproduitv) . '</td>';
+    echo '<td>' . $quantitev . '</td>';
+    echo '<td>' . $prixv . '</td>';
+    echo '<td>' . $dateachatv . '</td>';
+    echo '<td>' . $moyenachatv . '</td>';
+    echo '<td>' .  utf8_encode($commentairesv) . '</td>';
 
     echo '</tr>';
 
@@ -127,18 +98,22 @@ if ($_POST['action'] == 'Update') {
 
     echo '<form action="update_confirmed_vente.php" method="post">';
 
-    echo '<td><input type="hidden" name="new_idvente" value=' . $idc . ' >' . $idc . '</td>';
-    echo '<td><input type="text" name="new_nomvente" maxlength="60"></td>';
-    echo '<td><input type="text" name="new_prenomvente" maxlength="60"></td>';
-    echo '<td><input type="text" name="new_adressevente" maxlength="200"></td>';
-    echo '<td><input type="text" name="new_codepostalvente" maxlength="20"></td>';
-    echo '<td><input type="text" name="new_villevente" maxlength="80"></td>';
-    echo '<td><input type="text" name="new_numtelvente" maxlength="20"></td>';
-    echo '<td><input type="text" name="new_datenaissancevente" maxlength="20"></td>';
-    echo '<td>' .  $nbachatsc . '</td>';
+    echo '<td><input type="hidden" name="new_idvente" value=' . $idv . ' >' . $idv . '</td>';
+    echo '<td><input type="hidden" name="new_idclient" value=' . $idclientv . ' >' . $idclientv . '</td>';
+    echo '<td><input type="hidden" name="new_nomclient" value=' . $nomclientv . ' >' . $nomclientv . '</td>';
+    echo '<td><input type="hidden" name="new_idproduit" value=' . $idproduitv . ' >' . $idproduitv . '</td>';
+    echo '<td><input type="hidden" name="new_nomproduit" value=' . $nomproduitv . ' >' . $nomproduitv . '</td>';
+
+    echo '<td><input type="text" name="new_quantitevente" maxlength="60"></td>';
+    echo '<td><input type="text" name="new_prixvente" maxlength="60"></td>';
+    echo '<td><input type="text" name="new_dateachatvente" maxlength="200"></td>';
+    echo'<td><select name="new_moyenachatvente" size="1">
+      <option value="Papier">Papier</option>
+      <option value="Internet">Internet</option>
+    </select></td>';
     echo '<td><input type="text" name="new_commentairesvente" maxlength="250"></td>';
 
-
+    echo '</form>';
 
     echo '</tr>';
     echo '</table>';
