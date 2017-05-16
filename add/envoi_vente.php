@@ -32,7 +32,13 @@ if(isset($_POST) && !empty($_POST['id_client_vente']) && !empty($_POST['id_produ
   $prixv = $_POST['prixvente'];
   $moyenachatv = $_POST['moyen_achatvente'];
 
+
 #Extraction des valeurs NULL. Si on détecte qu'elles sont vides, on leur donne la valeur NULL.
+  if(empty($_POST['date_achatvente']))
+    $id_client = 0;
+  else
+    $date_achatvFr = $_POST['id_client_vente'];
+
   if(empty($_POST['date_achatvente']))
     $date_achatv = "";
   else
@@ -41,7 +47,6 @@ if(isset($_POST) && !empty($_POST['id_client_vente']) && !empty($_POST['id_produ
     $date_achatvFr = $_POST['date_achatvente'];
     $date_achatv = substr($date_achatvFr, 6, 4).'-'.substr($date_achatvFr, 3, 2).'-'.substr($date_achatvFr, 0, 2);
   }
-
 
   if(empty($_POST['commentairesvente']))
     $commentairesv = "";
@@ -61,11 +66,11 @@ if(isset($_POST) && !empty($_POST['id_client_vente']) && !empty($_POST['id_produ
 #Si aucune date n'a été rentrée, alors on effectue l'insertion sans même la spécifier dans la requête.
 
 if($date_achatv != NULL)
-  $sqlv = "INSERT INTO VENTE (id_client, id_produit, quantite, prix, date_achat, moyen_payement, commentaires_vente)
-  VALUES(\"$id_clientv\", \"$id_produitv\",  \"$quantitev\", \"$prixv\", \"$date_achatv\", \"$moyen_payementv\", \"$commentairesv\");";
+  $sqlv = "INSERT INTO VENTE (id_client, id_produit, quantite, prix, date_achat, moyen_achat, commentaires_vente)
+  VALUES(\"$id_clientv\", \"$id_produitv\",  \"$quantitev\", \"$prixv\", \"$date_achatv\", \"$moyenachatv\", \"$commentairesv\");";
 else {
-  $sqlv = "INSERT INTO VENTE (id_client, id_produit, quantite, prix, moyen_payement, commentaires_vente)
-  VALUES(\"$id_clientv\", \"$id_produitv\",  \"$quantitev\", \"$prixv\", \"$moyen_payementv\", \"$commentairesv\");";
+  $sqlv = "INSERT INTO VENTE (id_client, id_produit, quantite, prix, moyen_achat, commentaires_vente)
+  VALUES(\"$id_clientv\", \"$id_produitv\",  \"$quantitev\", \"$prixv\", \"$moyenachatv\", \"$commentairesv\");";
 }
 
 $mysqli->query($sqlv);

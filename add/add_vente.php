@@ -8,7 +8,7 @@ Ce formulaire sera envoyé vers envoi_vente.php, qui se chargera d'insérer les 
 <body class="body">
 
 <form action="envoi_vente.php" method="post">
-      <p style="font-family='Comic sans MS;'"><input type="text" name="id_client_vente" maxlength="60"> ID du client</p>
+      <p style="font-family='Comic sans MS;'"><input type="text" name="id_client_vente" maxlength="60"> ID du client [OPTIONNEL]</p>
 
       <p><input type="text" name="id_produit_vente" maxlength="60"> ID du produit</p>
 

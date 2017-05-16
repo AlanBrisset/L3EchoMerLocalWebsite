@@ -48,7 +48,7 @@ if ($result->num_rows > 0) {
     echo'<th><a href="#" onclick="sortTable(this,6); return false;">Nb d\'articles achetés</th>';
     echo'<th><a href="#" onclick="sortTable(this,7); return false;">Prix total</th>';
     echo'<th>Date de la vente</th>';
-    echo'<th><a href="#" onclick="sortTable(this,9); return false;">Moyen de payement</th>';
+    echo'<th><a href="#" onclick="sortTable(this,9); return false;">Plateforme de la vente</th>';
     echo'<th>Commentaires</th>';
 
     #On traite ensuite ligne par ligne (vente par vente)
@@ -97,7 +97,7 @@ if ($result->num_rows > 0) {
         echo '<td>' . $row["quantite"] . '</td>';
         echo '<td>' . $row["prix"] . '</td>';
         echo '<td>' . $row["date_achat"] . '</td>';
-        echo '<td>' . $row["moyen_payement"] . '</td>';
+        echo '<td>' . $row["moyen_achat"] . '</td>';
         echo '<td>' . $row["commentaires_vente"] . '</td>';
 
 
