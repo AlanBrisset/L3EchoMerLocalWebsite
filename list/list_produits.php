@@ -69,6 +69,7 @@ if ($result->num_rows > 0) {
         echo '<td><input type="submit" name="action" value="Update" /></td>';
         echo '<td><input type="submit" name="action" value="Delete" onclick="return confirm(\'Voulez-vous vraiment supprimer ce produit? Cela supprimera également toutes les ventes dans lesquelles il apparaît.\')" /></td>';
 
+        echo '</form>';
         echo '</tr>';
     }
 
