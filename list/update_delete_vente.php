@@ -107,13 +107,21 @@ if ($_POST['action'] == 'Update') {
     echo '<td><input type="text" name="new_quantitevente" maxlength="60"></td>';
     echo '<td><input type="text" name="new_prixvente" maxlength="60"></td>';
     echo '<td><input type="text" name="new_dateachatvente" maxlength="200"></td>';
-    echo'<td><select name="new_moyenachatvente" size="1">
-      <option value="Papier">Papier</option>
-      <option value="Internet">Internet</option>
-    </select></td>';
+    if(stripos($moyenachatv, 'Papier') !== FALSE)
+    {
+      echo'<td><select name="new_moyenachatvente" size="1">
+        <option value="Papier" selected="selected">Papier</option>
+        <option value="Internet">Internet</option>
+      </select></td>';
+    }
+    else
+    {
+      echo'<td><select name="new_moyenachatvente" size="1">
+        <option value="Papier">Papier</option>
+        <option value="Internet" selected="selected">Internet</option>
+      </select></td>';
+    }
     echo '<td><input type="text" name="new_commentairesvente" maxlength="250"></td>';
-
-    echo '</form>';
 
     echo '</tr>';
     echo '</table>';
@@ -129,13 +137,13 @@ if ($_POST['action'] == 'Update') {
 
 } else if ($_POST['action'] == 'Delete') {
 
-  $idc = $_POST['hidden_idvente'];
+  $idv = $_POST['hidden_idvente'];
 
-  $sqlc = "DELETE FROM vente WHERE id_vente = " . $idc . ";";
+  $sqlc = "DELETE FROM vente WHERE id_vente = " . $idv . ";";
   $mysqli->query($sqlc);
 
   if ($mysqli->error) {
-      echo '<p>Erreur durant la suppression du vente. Voici l\'erreur, à montrer à un développeur comprenant le SQL :</p><br/>';
+      echo '<p>Erreur durant la suppression de la vente. Voici l\'erreur, à montrer à un développeur comprenant le SQL :</p><br/>';
       try {
         throw new Exception("MySQL error $mysqli->error <br> Query:<br> $sqlc", $mysqli->errno);
       } catch(Exception $e ) {
@@ -145,7 +153,7 @@ if ($_POST['action'] == 'Update') {
   }
 
   else {
-    echo '<h2>Suppression du vente réussie !<h2><br/>';
+    echo '<h2>Suppression de la vente réussie !<h2><br/>';
   }
 
   include('list_ventes.php');
