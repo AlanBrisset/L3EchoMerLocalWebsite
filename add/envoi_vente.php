@@ -30,6 +30,7 @@ if(isset($_POST) && !empty($_POST['id_client_vente']) && !empty($_POST['id_produ
   $id_produitv = $_POST['id_produit_vente'];
   $quantitev = $_POST['quantitevente'];
   $prixv = $_POST['prixvente'];
+  $moyenachatv = $_POST['moyen_achatvente'];
 
 #Extraction des valeurs NULL. Si on détecte qu'elles sont vides, on leur donne la valeur NULL.
   if(empty($_POST['date_achatvente']))
@@ -41,10 +42,6 @@ if(isset($_POST) && !empty($_POST['id_client_vente']) && !empty($_POST['id_produ
     $date_achatv = substr($date_achatvFr, 6, 4).'-'.substr($date_achatvFr, 3, 2).'-'.substr($date_achatvFr, 0, 2);
   }
 
-  if(empty($_POST['moyen_payementvente']))
-    $moyen_payementv = "";
-  else
-    $moyen_payementv = $_POST['moyen_payementvente'];
 
   if(empty($_POST['commentairesvente']))
     $commentairesv = "";

@@ -16,9 +16,14 @@ Ce formulaire sera envoyé vers envoi_vente.php, qui se chargera d'insérer les 
 
       <p><input type="number" step="0.01" min="0" name="prixvente" maxlength="200"> Prix total</p>
 
-      <p><input type="text" name="date_achatvente" maxlength="20"> Date de la vente [OPTIONNEL] Format : dd/mm/yyyy</p>
+      <p><select name="moyen_achatvente" size="1">
+        <option value="Papier">Papier</option>
+        <option value="Internet">Internet</option>
+      </select> Moyen d'achat</p>
 
-      <p><input type="text" name="moyen_payementvente" maxlength="20"> Moyen de payement [OPTIONNEL]</p>
+      <!--<p><input type="text" name="moyen_achatvente" maxlength="20"> Plateforme d'achat</p>-->
+
+      <p><input type="text" name="date_achatvente" maxlength="20"> Date de la vente [OPTIONNEL] Format : dd/mm/yyyy</p>
 
       <p><input style="height:100px; width: 200px;" type="text" name="commentairesvente" maxlength="250"> Commentaires [OPTIONNEL]</p>
 

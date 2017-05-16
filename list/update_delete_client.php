@@ -7,7 +7,7 @@
 
 
 #envoi_produit.php
-#Récupère les données du formulaire add_produit.php et les insère dans la base de données.
+#Récupère les données du formulaire add_client.php et les insère dans la base de données.
 
 // ----------- CONNEXION A LA BASE DE DONNEES -----------
 
